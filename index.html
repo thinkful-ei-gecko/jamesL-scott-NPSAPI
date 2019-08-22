@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel='stylesheet' href='index.css' type='text/css' />
     <title>Document</title>
 </head>
 <body>
     <h1>National Parks Search</h1>
     <form class="search-form">
-        <label for="state-search">Please enter a state
-            <input type="text" id="state-search" placeholder="enter your state by abbreviation" value="CO">
+        <label for="state-search">Please enter one or more state abbreviations
+            <input type="text" id="state-search" value="CO">
         </label>
-        <label for="num-results">
+        <label for="num-results">Please enter the desired number of results
             <input type="number" id="num-results" value="10">
         </label>
         <button type="submit">Search</button>

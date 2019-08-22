@@ -18,7 +18,6 @@ const handleSubmit = function() {
 }
 
 const getParks = function(query, maxResults) {
-    //fetch request from NPS API
     const params = {
         stateCode: query,
         limit: maxResults
@@ -26,11 +25,6 @@ const getParks = function(query, maxResults) {
     const queryString = formatQueryParams(params);
     const url = searchUrl + '?' + queryString + '&api_key=6pYnGRh2fIUoxdNtWv6AhRhdsbj9gagZUglwCO76';
     console.log(url);
-
-    // const options = {
-    //     headers: new Headers({
-    //         "X-Api-Key": apiKey})
-    // };
 
     fetch(url)
         .then(response => {
@@ -44,7 +38,6 @@ const getParks = function(query, maxResults) {
             $('.error-message').text(`Something went wrong: ${error.message}`);
         });
 };
-
 
 
 const displayData = function(jsonData, maxResults) {
@@ -62,12 +55,3 @@ const displayData = function(jsonData, maxResults) {
 }
 
 $(handleSubmit);
-
-
-
-/*
-
-https://developer.nps.gov/api/v1/parks?stateCode=     ${CO}   &limit=    10     &api_key=6pYnGRh2fIUoxdNtWv6AhRhdsbj9gagZUglwCO76
-
-
-*/
