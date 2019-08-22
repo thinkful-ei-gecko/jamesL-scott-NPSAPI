@@ -22,45 +22,39 @@ const getParks = function(query, maxResults) {
         limit: maxResults
     }
     const queryString = formatQueryParams(params);
-    const url = searchUrl + '?' + queryString;
+    const url = searchUrl + '?' + queryString + '&api_key=6pYnGRh2fIUoxdNtWv6AhRhdsbj9gagZUglwCO76';
     console.log(url);
 
-    const options = {
-        headers: new Headers({
-            "X-Api-Key": apiKey})
-    };
+    // const options = {
+    //     headers: new Headers({
+    //         "X-Api-Key": apiKey})
+    // };
 
-    fetch(url, options)
+    fetch(url)
         .then(response => {
             if (response.ok) {
                 return response.json()
             }
             throw new Error(response.statusText);
         })
-        .then()
-}
+        .then(jsonData => displayData(jsonData, maxResults))
+        .catch(error => {
+            $('.error-message').text(`Something went wrong: ${error.message}`);
+        });
+};
 
-// const extractData = function(jsonData) {
-//     //pull out full name, description, and website URL
-// }
 
-// const createTemplate = function(name, description, URL) {
-//     //make the extracted info into usable HTML
-// }
 
 const displayData = function(jsonData, maxResults) {
-    $('.parks-info').empty();
-
+    $('.parks-list').empty();
+    
     if (jsonData.data.length === 0) {
         $('.error-message').text('No results found. Please try again using the state abbreviation');
     } else {
-
-        for (let i = 0; i < maxResults && i <jsonData.data.length; i++) {
-            $('.parks-list').append(
-                `<li><h3><a href=${jsonData.data[i].url}>${jsonData.data[i].fullName}</a></h3>
-                    <p>${jsonData.data[i].description}</p>
-                `
-            )
+        for (let i = 0; i < jsonData.data.length && i < maxResults; i++) {
+            console.log();
+            $('.parks-list').append(`<li><a href=${jsonData.data[i].url}>${jsonData.data[i].fullName}</a></li>
+                    <p>${jsonData.data[i].description}</p>`)
         }
     }
 }
