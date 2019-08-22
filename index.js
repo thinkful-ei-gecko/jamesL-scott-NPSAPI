@@ -10,6 +10,8 @@ const handleSubmit = function() {
     $('.search-form').on('submit', event => {
         event.preventDefault();
         let state = $('#state-search').val();
+        state = state.trim().split(' ').join(',');
+        console.log(state)
         let num = $('#num-results').val();
         getParks(state, num);
     })
